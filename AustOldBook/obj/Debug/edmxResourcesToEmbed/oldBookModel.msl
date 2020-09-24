@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="oldbookModelStoreContainer" CdmEntityContainer="oldbookEntities3">
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="oldbookModel.Book">
+        <MappingFragment StoreEntitySet="Books">
+          <ScalarProperty Name="bookId" ColumnName="bookId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="bookImage" ColumnName="bookImage" />
+          <ScalarProperty Name="bookName" ColumnName="bookName" />
+          <ScalarProperty Name="authorName" ColumnName="authorName" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="lock" ColumnName="lock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfoes">
+      <EntityTypeMapping TypeName="oldbookModel.UserInfo">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phnNumber" ColumnName="phnNumber" />
+          <ScalarProperty Name="aaddress" ColumnName="aaddress" />
+          <ScalarProperty Name="ppassword" ColumnName="ppassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookCategories">
+      <EntityTypeMapping TypeName="oldbookModel.BookCategory">
+        <MappingFragment StoreEntitySet="BookCategory">
+          <ScalarProperty Name="catagoryId" ColumnName="catagoryId" />
+          <ScalarProperty Name="bookId" ColumnName="bookId" />
+          <ScalarProperty Name="semester" ColumnName="semester" />
+          <ScalarProperty Name="depertment" ColumnName="depertment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogIns">
+      <EntityTypeMapping TypeName="oldbookModel.LogIn">
+        <MappingFragment StoreEntitySet="LogIn">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="checkLog" ColumnName="checkLog" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

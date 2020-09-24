@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AustOldBookDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BookInfo">
+    <Key>
+      <PropertyRef Name="bookId" />
+    </Key>
+    <Property Name="bookId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="userId" Type="varchar" MaxLength="50" />
+    <Property Name="bookImage" Type="varbinary(max)" Nullable="false" />
+    <Property Name="bookName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="authorName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="semester" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="depertment" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="isLock" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'AustOldBookDB.dbo.LogInInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="LogInInfo">
+    <Key>
+      <PropertyRef Name="logInId" />
+    </Key>
+    <Property Name="logInId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="varchar" MaxLength="50" />
+    <Property Name="checkLog" Type="int" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="255" />
+    <Property Name="firstName" Type="varchar" MaxLength="255" />
+    <Property Name="email" Type="varchar" MaxLength="255" />
+    <Property Name="phnNumber" Type="varchar" MaxLength="20" />
+    <Property Name="aaddress" Type="varchar" MaxLength="255" />
+    <Property Name="ppassword" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__BookInfo__userId__5535A963">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+    <End Role="BookInfo" Type="Self.BookInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="BookInfo">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LogInInfo__userI__5AEE82B9">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+    <End Role="LogInInfo" Type="Self.LogInInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="LogInInfo">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AustOldBookDBModelStoreContainer">
+    <EntitySet Name="BookInfo" EntityType="Self.BookInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LogInInfo" EntityType="Self.LogInInfo" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [LogInInfo].[logInId] AS [logInId], 
+    [LogInInfo].[userId] AS [userId], 
+    [LogInInfo].[checkLog] AS [checkLog]
+    FROM [dbo].[LogInInfo] AS [LogInInfo]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__BookInfo__userId__5535A963" Association="Self.FK__BookInfo__userId__5535A963">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="BookInfo" EntitySet="BookInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LogInInfo__userI__5AEE82B9" Association="Self.FK__LogInInfo__userI__5AEE82B9">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="LogInInfo" EntitySet="LogInInfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

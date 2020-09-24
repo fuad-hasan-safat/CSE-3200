@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AustOldBookDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BookCategory">
+    <Key>
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="categoryId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bookId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="semester" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="depertment" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="BookInfo" Relationship="Self.FK__BookCateg__bookI__37A5467C" FromRole="BookCategories" ToRole="BookInfos" />
+  </EntityType>
+  <EntityType Name="BookInfo">
+    <Key>
+      <PropertyRef Name="bookId" />
+    </Key>
+    <Property Name="bookId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="bookImage" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="bookName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="authorName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="price" Type="Int32" Nullable="false" />
+    <Property Name="block" Type="Int32" />
+    <NavigationProperty Name="BookCategories" Relationship="Self.FK__BookCateg__bookI__37A5467C" FromRole="BookInfos" ToRole="BookCategories" />
+    <NavigationProperty Name="UserInfo" Relationship="Self.FK__BookInfos__userI__29572725" FromRole="BookInfos" ToRole="UserInfos" />
+  </EntityType>
+  <EntityType Name="LogInCheck">
+    <Key>
+      <PropertyRef Name="loginId" />
+    </Key>
+    <Property Name="loginId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="isLogIn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserInfo" Relationship="Self.FK__LogInChec__userI__3B75D760" FromRole="LogInCheck" ToRole="UserInfos" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="firstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="phnNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="aaddress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ppassword" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BookInfos" Relationship="Self.FK__BookInfos__userI__29572725" FromRole="UserInfos" ToRole="BookInfos" />
+    <NavigationProperty Name="LogInChecks" Relationship="Self.FK__LogInChec__userI__3B75D760" FromRole="UserInfos" ToRole="LogInCheck" />
+  </EntityType>
+  <Association Name="FK__BookCateg__bookI__37A5467C">
+    <End Role="BookInfos" Type="Self.BookInfo" Multiplicity="0..1" />
+    <End Role="BookCategories" Type="Self.BookCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookInfos">
+        <PropertyRef Name="bookId" />
+      </Principal>
+      <Dependent Role="BookCategories">
+        <PropertyRef Name="bookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BookInfos__userI__29572725">
+    <End Role="UserInfos" Type="Self.UserInfo" Multiplicity="0..1" />
+    <End Role="BookInfos" Type="Self.BookInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfos">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="BookInfos">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LogInChec__userI__3B75D760">
+    <End Role="UserInfos" Type="Self.UserInfo" Multiplicity="0..1" />
+    <End Role="LogInCheck" Type="Self.LogInCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfos">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="LogInCheck">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AustOldBookDBEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BookCategories" EntityType="Self.BookCategory" />
+    <EntitySet Name="BookInfos" EntityType="Self.BookInfo" />
+    <EntitySet Name="LogInChecks" EntityType="Self.LogInCheck" />
+    <EntitySet Name="UserInfos" EntityType="Self.UserInfo" />
+    <AssociationSet Name="FK__BookCateg__bookI__37A5467C" Association="Self.FK__BookCateg__bookI__37A5467C">
+      <End Role="BookInfos" EntitySet="BookInfos" />
+      <End Role="BookCategories" EntitySet="BookCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BookInfos__userI__29572725" Association="Self.FK__BookInfos__userI__29572725">
+      <End Role="UserInfos" EntitySet="UserInfos" />
+      <End Role="BookInfos" EntitySet="BookInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LogInChec__userI__3B75D760" Association="Self.FK__LogInChec__userI__3B75D760">
+      <End Role="UserInfos" EntitySet="UserInfos" />
+      <End Role="LogInCheck" EntitySet="LogInChecks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

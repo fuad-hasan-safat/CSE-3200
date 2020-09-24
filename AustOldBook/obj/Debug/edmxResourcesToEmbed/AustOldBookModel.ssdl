@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AustOldBookDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BookCategories">
+    <Key>
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="categoryId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="bookId" Type="varchar" MaxLength="50" />
+    <Property Name="semester" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="depertment" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookInfos">
+    <Key>
+      <PropertyRef Name="bookId" />
+    </Key>
+    <Property Name="bookId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="userId" Type="varchar" MaxLength="50" />
+    <Property Name="bookImage" Type="varbinary(max)" Nullable="false" />
+    <Property Name="bookName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="authorName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="lock" Type="int" />
+  </EntityType>
+  <EntityType Name="LogInCheck">
+    <Key>
+      <PropertyRef Name="loginId" />
+    </Key>
+    <Property Name="loginId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="userId" Type="varchar" MaxLength="50" />
+    <Property Name="isLogIn" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'AustOldBookDB.dbo.LogInInfos' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="LogInInfos">
+          <Property Name="userId" Type="varchar" MaxLength="50" />
+          <Property Name="checkLog" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+  <EntityType Name="UserInfos">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="255" />
+    <Property Name="firstName" Type="varchar" MaxLength="255" />
+    <Property Name="email" Type="varchar" MaxLength="255" />
+    <Property Name="phnNumber" Type="varchar" MaxLength="20" />
+    <Property Name="aaddress" Type="varchar" MaxLength="255" />
+    <Property Name="ppassword" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__BookCateg__bookI__37A5467C">
+    <End Role="BookInfos" Type="Self.BookInfos" Multiplicity="0..1" />
+    <End Role="BookCategories" Type="Self.BookCategories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookInfos">
+        <PropertyRef Name="bookId" />
+      </Principal>
+      <Dependent Role="BookCategories">
+        <PropertyRef Name="bookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BookInfos__userI__29572725">
+    <End Role="UserInfos" Type="Self.UserInfos" Multiplicity="0..1" />
+    <End Role="BookInfos" Type="Self.BookInfos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfos">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="BookInfos">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LogInChec__userI__3B75D760">
+    <End Role="UserInfos" Type="Self.UserInfos" Multiplicity="0..1" />
+    <End Role="LogInCheck" Type="Self.LogInCheck" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfos">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="LogInCheck">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+error 6004: The table 'AustOldBookDB.dbo.LogInInfos' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__LogInInfo__userI__300424B4" />-->
+  <EntityContainer Name="AustOldBookDBModelStoreContainer">
+    <EntitySet Name="BookCategories" EntityType="Self.BookCategories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookInfos" EntityType="Self.BookInfos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LogInCheck" EntityType="Self.LogInCheck" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfos" EntityType="Self.UserInfos" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__BookCateg__bookI__37A5467C" Association="Self.FK__BookCateg__bookI__37A5467C">
+      <End Role="BookInfos" EntitySet="BookInfos" />
+      <End Role="BookCategories" EntitySet="BookCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BookInfos__userI__29572725" Association="Self.FK__BookInfos__userI__29572725">
+      <End Role="UserInfos" EntitySet="UserInfos" />
+      <End Role="BookInfos" EntitySet="BookInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LogInChec__userI__3B75D760" Association="Self.FK__LogInChec__userI__3B75D760">
+      <End Role="UserInfos" EntitySet="UserInfos" />
+      <End Role="LogInCheck" EntitySet="LogInCheck" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

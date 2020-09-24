@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AustOldBookDBModelStoreContainer" CdmEntityContainer="AustOldBookDBEntities4">
+    <EntitySetMapping Name="BookInfoes">
+      <EntityTypeMapping TypeName="AustOldBookDBModel.BookInfo">
+        <MappingFragment StoreEntitySet="BookInfo">
+          <ScalarProperty Name="bookId" ColumnName="bookId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="bookImage" ColumnName="bookImage" />
+          <ScalarProperty Name="bookName" ColumnName="bookName" />
+          <ScalarProperty Name="authorName" ColumnName="authorName" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="semester" ColumnName="semester" />
+          <ScalarProperty Name="depertment" ColumnName="depertment" />
+          <ScalarProperty Name="isLock" ColumnName="isLock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfoes">
+      <EntityTypeMapping TypeName="AustOldBookDBModel.UserInfo">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phnNumber" ColumnName="phnNumber" />
+          <ScalarProperty Name="aaddress" ColumnName="aaddress" />
+          <ScalarProperty Name="ppassword" ColumnName="ppassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogInInfoes">
+      <EntityTypeMapping TypeName="AustOldBookDBModel.LogInInfo">
+        <MappingFragment StoreEntitySet="LogInInfo">
+          <ScalarProperty Name="logInId" ColumnName="logInId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="checkLog" ColumnName="checkLog" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
